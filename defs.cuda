@@ -1,7 +1,12 @@
-SDK_PATH=$(HOME)/NVIDIA_GPU_Computing_SDK
+# change this to use paths other than "Desktop"
+
+#SDK_PATH=$(HOME)/NVIDIA_GPU_Computing_SDK
+SDK_PATH=/Developer/GPU\ Computing/
 NVCC=/usr/local/cuda/bin/nvcc
 SDK_COMMON_INC=$(SDK_PATH)/C/common/inc
 SDK_SHARED_INC=$(SDK_PATH)/C/shared/inc
 CUDA_INCLUDE=/usr/local/cuda/include
-CUDPP_PATH=$(HOME)/Downloads/cudpp_src_2.0
+CUDA_LIB=/usr/local/cuda/
+CUDPP_PATH=$(HOME)/Desktop/cudpp_src_2.0
 CUDPP_INC=$(CUDPP_PATH)/include
+PLATFORM=darwin

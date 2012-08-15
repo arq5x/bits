@@ -4,14 +4,13 @@ OBJ_DIR = ../../obj/
 BIN_DIR = ../../bin/
 
 LFLAGS_A=-fPIC
-LFLAGS_B=-L/usr/local/cuda/lib64 \
-		 -L$(SDK_PATH)/C/lib \
-		 -L$(SDK_PATH)/C/common/lib/linux \
+LFLAGS_B=-L$(SDK_PATH)/C/lib \
+		 -L$(SDK_PATH)/C/common/lib/$(PLATFORM) \
 		 -L$(SDK_PATH)/shared/lib \
 		 -L$(CUDPP_PATH)/lib \
+		 -L$(CUDA_LIB)/lib \
 		 -lcudpp \
 		 -lcudart \
-		 -lcudpp_x86_64 \
 		 -lcuda
 
 # -------------------
@@ -70,11 +69,11 @@ $(PROGRAM): $(BUILT_OBJECTS) $(BUILT_CUDA_OBJECTS) $(EXT_OBJECTS)
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo " * compiling" $(*F).cpp
-	nvcc -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	$(NVCC) -m64 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
 
 $(BUILT_CUDA_OBJECTS): $(CUDA_SOURCES)
 	@echo "  * compiling" $(*F)
-	$(NVCC) -c -o $@ $(*F) $(INCLUDES) $(LFLAGS_B) 
+	$(NVCC) -m64 -c -o $@ $(*F) $(INCLUDES) $(LFLAGS_B) 
 
 
 $(EXT_OBJECTS):
