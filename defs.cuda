@@ -6,7 +6,10 @@ NVCC=/usr/local/cuda/bin/nvcc
 SDK_COMMON_INC=$(SDK_PATH)/C/common/inc
 SDK_SHARED_INC=$(SDK_PATH)/C/shared/inc
 CUDA_INCLUDE=/usr/local/cuda/include
-CUDA_LIB=/usr/local/cuda/
+
+# if OSX, likely: /usr/local/cuda/lib
+# if Linux, likely:  /usr/local/cuda/lib64 
+CUDA_LIB=/usr/local/cuda/lib
 CUDPP_PATH=$(HOME)/Desktop/cudpp_src_2.0
 CUDPP_INC=$(CUDPP_PATH)/include
 PLATFORM=darwin

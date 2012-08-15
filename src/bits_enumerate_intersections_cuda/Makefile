@@ -8,7 +8,7 @@ LFLAGS_B=-L$(SDK_PATH)/C/lib \
 		 -L$(SDK_PATH)/C/common/lib/$(PLATFORM) \
 		 -L$(SDK_PATH)/shared/lib \
 		 -L$(CUDPP_PATH)/lib \
-		 -L$(CUDA_LIB)/lib \
+		 -L$(CUDA_LIB)/ \
 		 -lcudpp \
 		 -lcudart \
 		 -lcuda
