@@ -1,0 +1,30 @@
+A=data/rmsk.hg18.chr21.bed
+B=data/knownGene.hg18.chr21.bed
+G=genomes/human.hg18.genome
+N=1000
+
+echo bits_count
+bin/bits_count -a $A -b $B -g $G
+
+echo bits_count_cuda
+bin/bits_count_cuda -a $A -b $B -g $G
+
+echo bits_count_per_interval
+bin/bits_count_per_interval -a $A -b $B -g $G \
+	| awk '{ SUM += $4} END { print SUM }' 
+
+echo bits_count_per_interval_cuda
+bin/bits_count_per_interval_cuda -a $A -b $B -g $G \
+	| awk '{ SUM += $4} END { print SUM }' 
+
+echo bits_enumerate
+bin/bits_enumerate -a $A -b $B -g $G | wc -l
+
+echo bits_enumerate_cuda
+bin/bits_enumerate_cuda -a $A -b $B -g $G | wc -l
+
+echo bits_test
+bin/bits_test -a $A -b $B -g $G -n $N 
+
+echo bits_test_cuda
+bin/bits_test_cuda -a $A -b $B -g $G -n $N 

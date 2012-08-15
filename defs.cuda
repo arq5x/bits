@@ -1,0 +1,7 @@
+SDK_PATH=$(HOME)/NVIDIA_GPU_Computing_SDK
+NVCC=/usr/local/cuda/bin/nvcc
+SDK_COMMON_INC=$(SDK_PATH)/C/common/inc
+SDK_SHARED_INC=$(SDK_PATH)/C/shared/inc
+CUDA_INCLUDE=/usr/local/cuda/include
+CUDPP_PATH=$(HOME)/Downloads/cudpp_src_2.0
+CUDPP_INC=$(CUDPP_PATH)/include
