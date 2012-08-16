@@ -15,8 +15,8 @@ NVidia CUDA GPU.  If you have questions, email me.
 Install the GNU Scientific Libraries (GSL).
 
     - This is typically quite simple, as one can use package managers.
-        - e.g., for OS X using Homebrew: brew install gsl
-        - e.g., for Ubuntu: apt-get gsl
+        - e.g., for OS X using Homebrew: `brew install gsl`
+        - e.g., for Ubuntu: `apt-get install gsl`
 
 Download and install the CUDA toolkit.
 
