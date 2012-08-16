@@ -37,20 +37,20 @@ NVidia CUDA GPU.  If you have questions, email me.
 		- The default path for OSX is /Developer/GPU\ Computing/
 
 5. Download and install the cudapp library at: http://code.google.com/p/cudpp/.
-Once downloaded, do:
+Once downloaded, do::
 
     cd cudpp_src_2.0
     cmake .
     make
 
-	- *Important*: Take note of the path to which you placed cudpp - 
-	   you will need this when we update the BITS Makefile.
+- *Important*: Take note of the path to which you placed cudpp, as you will 
+need this when we update the BITS Makefile.
 	
-6. Update your PATH (rec. you save in .bash_profile for permanence) as follows.
+6. Update your PATH (rec. you save in .bash_profile for permanence) 
+as follows.::
 
     export PATH=/usr/local/cuda/bin:$PATH
     export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
-
 
 7. Clone the BITS repository
 
@@ -62,21 +62,21 @@ Once downloaded, do:
 
 9. Edit the `defs.cuda` file in accordance with your configuration.
 
-	a. Edit the PLATFORM environment variable.
+	- Edit the PLATFORM environment variable.
 		- if OSX,   set PLATFORM=darwin
 		- if Linux, set PLATFORM=linux
 		- if Windows, sorry this is unsupported.
 	
-	b. Edit the SDK_PATH environment variable.
+	- Edit the SDK_PATH environment variable.
 		- This is the installation path that you should have taken note of
 		  in step #4.
 		- e.g., for OS X, this should be: SDK_PATH=/Developer/GPU\ Computing/
 		
-	c. Edit the SDK_PATH environment variable.
+	- Edit the SDK_PATH environment variable.
 		- This is the path to which you downloaded and compiled cudpp in step
 		  #5.
 	
-	d. EDIT the CUDA_LIB environment variable.
+	- EDIT the CUDA_LIB environment variable.
 		- If OS X, this should be: /usr/local/cuda/lib
 		- If Linux, this should be: /usr/local/cuda/lib64
 		
