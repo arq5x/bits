@@ -1,15 +1,29 @@
-# change this to use paths other than "Desktop"
-
-#SDK_PATH=$(HOME)/NVIDIA_GPU_Computing_SDK
+# Update SDK_PATH to the path appropriate to your system
 SDK_PATH=/Developer/GPU\ Computing/
+
+# This should be okay as-is
 NVCC=/usr/local/cuda/bin/nvcc
+
+# This should be okay as-is
 SDK_COMMON_INC=$(SDK_PATH)/C/common/inc
+
+# This should be okay as-is
 SDK_SHARED_INC=$(SDK_PATH)/C/shared/inc
+
+# This should be okay as-is
 CUDA_INCLUDE=/usr/local/cuda/include
 
+# Update CUDA_LIB to the path appropriate to your system
 # if OSX, likely: /usr/local/cuda/lib
 # if Linux, likely:  /usr/local/cuda/lib64 
 CUDA_LIB=/usr/local/cuda/lib
+
+# Update CUDPP_PATH to the path appropriate to your system
 CUDPP_PATH=$(HOME)/Desktop/cudpp_src_2.0
+
+# This should be okay as-is
 CUDPP_INC=$(CUDPP_PATH)/include
+
+# Update CUDA_LIB to the path appropriate to your system
+# If Linux, set PLATFORM=linux
 PLATFORM=darwin

@@ -7,45 +7,107 @@ of Virginia.
 
 Installation
 ============
-Installation requires NVidia GPU drivers and libraries.  Stay tuned for
-detailed installation instructions.
+BITS installation requires the GNU Scientific Library (GSL) as well as
+NVidia GPU drivers and libraries. Below is a step-by-step tutorial for how
+to install the necessary drivers, SDK and libraries to run BITS on an
+NVidia CUDA GPU.  If you have questions, email me.
 
-CUDA download center: http://developer.nvidia.com/cuda/cuda-downloads
 
-0. Install GSL.
-	- e.g., for OS X: brew install gsl
-	- e.g., for Ubuntu: apt-get gsl
+1. Install the GNU Scientific Libraries (GSL).
+	- This is typically quite simple, as one can use package managers.
+		- e.g., for OS X using Homebrew: brew install gsl
+		- e.g., for Ubuntu: apt-get gsl
 
-1. Download and install the CUDA toolkit.
-    - http://developer.nvidia.com/cuda-downloads
+2. Download and install the CUDA toolkit.
+    - The CUDA toolkit for multiple platforms is available at:
+		- http://developer.nvidia.com/cuda-downloads
     - e.g., for OS X: http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/cudatoolkit_4.2.9_macos.pkg
 
-2. Download and install the CUDA drivers for you system.
-    - http://developer.nvidia.com/cuda-downloads
+3. Download and install the CUDA drivers for you system.
+    - Likewise available for many platforms at: 
+		- http://developer.nvidia.com/cuda-downloads
     - e.g., for OS X: http://developer.download.nvidia.com/compute/cuda/4_2/rel/drivers/devdriver_4.2.10_macos.dmg
 
-3. Download and install the CUDA SDK.
-	- http://developer.download.nvidia.com/compute/cuda/4_2/rel/sdk/gpucomputingsdk_4.2.9_macos.pkg
-	- default for OSX is /Developer/GPU Computing/
+4. Download and install the CUDA SDK.
+	- Likewise available for many platforms at: 
+		- http://developer.nvidia.com/cuda-downloads
+	- e.g., for OS X: http://developer.download.nvidia.com/compute/cuda/4_2/rel/sdk/gpucomputingsdk_4.2.9_macos.pkg
+	- *Important*: Take note of the installation path - you will need 
+	   this when we update the BITS Makefile.
+		- The default path for OSX is /Developer/GPU\ Computing/
 
-4. Download and install the cudapp library
-http://code.google.com/p/cudpp/
-  cd cudpp_src_2.0
-  cmake .
-  make
+5. Download and install the cudapp library at: http://code.google.com/p/cudpp/.
+Once downloaded, do:
 
-4. Update PATH (and possibly add to .bash_profile)
-	export PATH=/usr/local/cuda/bin:$PATH
-	export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+    cd cudpp_src_2.0
+    cmake .
+    make
 
-4. Edit defs.cuda accordingly.
-	a. if OSX,   set PLATFORM=darwin
-	   if Linux, set PLATFORM=linux
-	   if Windows, sorry.
+	- *Important*: Take note of the path to which you placed cudpp - 
+	   you will need this when we update the BITS Makefile.
 	
-	b. edit SDK_PATH
+6. Update your PATH (rec. you save in .bash_profile for permanence) as follows.
+
+    export PATH=/usr/local/cuda/bin:$PATH
+    export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
+
+
+7. Clone the BITS repository
+
+    git clone git://github.com/arq5x/bits.git
+
+8. Navigate into the bits directory
+
+    cd bits
+
+9. Edit the `defs.cuda` file in accordance with your configuration.
+
+	a. Edit the PLATFORM environment variable.
+		- if OSX,   set PLATFORM=darwin
+		- if Linux, set PLATFORM=linux
+		- if Windows, sorry this is unsupported.
+	
+	b. Edit the SDK_PATH environment variable.
+		- This is the installation path that you should have taken note of
+		  in step #4.
 		- e.g., for OS X, this should be: SDK_PATH=/Developer/GPU\ Computing/
 		
-	c. edit CUDPP_PATH
-		- set this to the path in which you downloaded and compiled cudpp
+	c. Edit the SDK_PATH environment variable.
+		- This is the path to which you downloaded and compiled cudpp in step
+		  #5.
+	
+	d. EDIT the CUDA_LIB environment variable.
+		- If OS X, this should be: /usr/local/cuda/lib
+		- If Linux, this should be: /usr/local/cuda/lib64
+		
+10. At this point, you should be ready to compile BITS.
+
+    make
+
+11. Now, you can test both the sequential and CUDA versions of the tools by
+    running the `bits_tests` scripts.
+
+    sh bits_tests
+
+    If all works well, you should see the following:
+
+    sh bits_tests
+
+	bits_count
+	72534
+	bits_count_cuda
+	72534
+	bits_count_per_interval
+	72534
+	bits_count_per_interval_cuda
+	72534
+	bits_enumerate
+	   72534
+	bits_enumerate_cuda
+	   72534
+	bits_test
+	O:72534	E:1124.853000	sd:33.680585	p:0.000999
+	bits_test_cuda
+	O:72534	E:1124.081000	sd:36.552024	p:0.000999
+    
 
