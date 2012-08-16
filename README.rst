@@ -116,8 +116,21 @@ Usage
 =====
 
 1. If you want to run the BITS CUDA Monte Carlo simulation tool for a single
-    pairwise comparison of two BED files, run the following, where -n is the 
-    number of MC iterations and -g is the name and size of each chromosome.
+   pairwise comparison of two BED files, run the following, where -n is the 
+   number of MC iterations and -g is the name and size of each chromosome.
 
     bin/bits_test_cuda -a a.bed -b b.bed -g chrom.sizes -n 1000 
+
+2. If you want to run the BITS CUDA Monte Carlo simulation tool for a _many_
+    pairwise comparison of multiple BED files, just create a shell script that
+    loops over every pairwise set of files and calls the program as above. For
+    example:
+
+    for file1 in `cat file_list.txt`
+    do
+        for file2 in `cat file_list.txt`
+        do
+            bin/bits_test_cuda -a $file1 -b $file2 -g chrom.sizes -n 1000
+        done
+    done
 
