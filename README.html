@@ -329,10 +329,9 @@ of Virginia.</p>
 NVidia GPU drivers and libraries. Below is a step-by-step tutorial for how
 to install the necessary drivers, SDK and libraries to run BITS on an
 NVidia CUDA GPU.  If you have questions, email me.</p>
-<ol class="arabic">
-<li><dl class="first docutils">
-<dt>Install the GNU Scientific Libraries (GSL).</dt>
-<dd><ul class="first last">
+<p>Install the GNU Scientific Libraries (GSL).</p>
+<blockquote>
+<ul>
 <li><dl class="first docutils">
 <dt>This is typically quite simple, as one can use package managers.</dt>
 <dd><ul class="first last simple">
@@ -343,12 +342,10 @@ NVidia CUDA GPU.  If you have questions, email me.</p>
 </dl>
 </li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Download and install the CUDA toolkit.</dt>
-<dd><ul class="first last">
+</blockquote>
+<p>Download and install the CUDA toolkit.</p>
+<blockquote>
+<ul>
 <li><dl class="first docutils">
 <dt>The CUDA toolkit for multiple platforms is available at:</dt>
 <dd><ul class="first last simple">
@@ -360,12 +357,10 @@ NVidia CUDA GPU.  If you have questions, email me.</p>
 <li><p class="first">e.g., for OS X: <a class="reference external" href="http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/cudatoolkit_4.2.9_macos.pkg">http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/cudatoolkit_4.2.9_macos.pkg</a></p>
 </li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Download and install the CUDA drivers for you system.</dt>
-<dd><ul class="first last">
+</blockquote>
+<p>Download and install the CUDA drivers for you system.</p>
+<blockquote>
+<ul>
 <li><dl class="first docutils">
 <dt>Likewise available for many platforms at:</dt>
 <dd><ul class="first last simple">
@@ -377,12 +372,10 @@ NVidia CUDA GPU.  If you have questions, email me.</p>
 <li><p class="first">e.g., for OS X: <a class="reference external" href="http://developer.download.nvidia.com/compute/cuda/4_2/rel/drivers/devdriver_4.2.10_macos.dmg">http://developer.download.nvidia.com/compute/cuda/4_2/rel/drivers/devdriver_4.2.10_macos.dmg</a></p>
 </li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>Download and install the CUDA SDK.</dt>
-<dd><ul class="first last">
+</blockquote>
+<p>Download and install the CUDA SDK.</p>
+<blockquote>
+<ul>
 <li><dl class="first docutils">
 <dt>Likewise available for many platforms at:</dt>
 <dd><ul class="first last simple">
@@ -395,13 +388,11 @@ NVidia CUDA GPU.  If you have questions, email me.</p>
 </li>
 <li><p class="first"><em>Important</em>: Take note of the installation path - you will need this when we update the BITS Makefile.</p>
 </li>
-<li><p class="first">The default path for OSX is <cite>/Developer/GPUComputing/</cite></p>
+<li><p class="first">The default path for OSX is <cite>/Developer/GPUComputing/</cite>.</p>
 </li>
 </ul>
-</dd>
-</dl>
-</li>
-<li><p class="first">Download and install the cudapp library at: <a class="reference external" href="http://code.google.com/p/cudpp/">http://code.google.com/p/cudpp/</a>. Once downloaded, do:</p>
+</blockquote>
+<p>Download and install the cudapp library at: <a class="reference external" href="http://code.google.com/p/cudpp/">http://code.google.com/p/cudpp/</a>. Once downloaded, do</p>
 <pre class="literal-block">
 cd cudpp_src_2.0
 cmake .
@@ -409,24 +400,20 @@ make
 
 *Important*: Take note of the path to which you placed cudpp, as you will need this when we update the BITS Makefile.
 </pre>
-</li>
-<li><p class="first">Update your PATH (rec. you save in .bash_profile for permanence) as follows:</p>
+<p>Update your PATH (rec. you save in .bash_profile for permanence) as follows</p>
 <pre class="literal-block">
 export PATH=/usr/local/cuda/bin:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
 </pre>
-</li>
-<li><p class="first">Clone the BITS repository:</p>
+<p>Clone the BITS repository</p>
 <pre class="literal-block">
 git clone git://github.com/arq5x/bits.git
 </pre>
-</li>
-<li><p class="first">Navigate into the bits directory:</p>
+<p>Navigate into the bits directory</p>
 <pre class="literal-block">
 cd bits
 </pre>
-</li>
-<li><dl class="first docutils">
+<dl class="docutils">
 <dt>Edit the <cite>defs.cuda</cite> file in accordance with your configuration.</dt>
 <dd><ul class="first last">
 <li><dl class="first docutils">
@@ -470,9 +457,7 @@ in step #4.</li>
 </ul>
 </dd>
 </dl>
-</li>
-</ol>
-<p>10. At this point, you should be ready to compile BITS</p>
+<p>At this point, you should be ready to compile BITS</p>
 <pre class="literal-block">
 make
 </pre>
