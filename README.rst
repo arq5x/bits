@@ -85,7 +85,8 @@ Once downloaded, do:
     make
 
 11. Now, you can test both the sequential and CUDA versions of the tools by
-    running the `bits_tests` scripts.
+    running the `bits_tests` scripts. Also, this shell script demonstrates 
+    how to run each of the BITS tools.
 
     sh bits_tests
 
@@ -109,5 +110,14 @@ Once downloaded, do:
 	O:72534	E:1124.853000	sd:33.680585	p:0.000999
 	bits_test_cuda
 	O:72534	E:1124.081000	sd:36.552024	p:0.000999
-    
+
+
+Usage
+=====
+
+1. If you want to run the BITS CUDA Monte Carlo simulation tool for a single
+    pairwise comparison of two BED files, run the following, where -n is the 
+    number of MC iterations and -g is the name and size of each chromosome.
+
+    bin/bits_test_cuda -a a.bed -b b.bed -g chrom.sizes -n 1000 
 
