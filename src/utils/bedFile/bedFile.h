@@ -424,6 +424,7 @@ public:
     // load a BED file into a vector
     void loadBedFileIntoVector();
 
+	int countLines();
 
 	void loadBedFileIntoIntervalArray( 	struct interval **_A,
                                     	unsigned int *A_size ,

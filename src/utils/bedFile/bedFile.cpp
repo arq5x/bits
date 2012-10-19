@@ -526,6 +526,19 @@ void BedFile::setBedType (int colNums) {
 }
 
 
+int BedFile::countLines() {
+
+    Open();
+	int n = 0;
+	while( getline(*_bedStream, _bedLine) ) {
+		n++;
+	}
+    Close();
+
+	return n;
+}
+
+
 void BedFile::loadBedFileIntoMap() {
 
     BED bedEntry, nullBed;
@@ -692,8 +705,9 @@ void BedFile::loadBedFileIntoIntervalArray( struct interval **_A,
     int lineNum = 0;
     BedLineStatus bedStatus;
 
-    *A_size = 0;
+    *A_size = countLines();
 
+	/*
     Open();
 
     while ((bedStatus = this->GetNextBed(bedEntry, lineNum)) != BED_INVALID) {
@@ -705,6 +719,7 @@ void BedFile::loadBedFileIntoIntervalArray( struct interval **_A,
     }
 	bedEntry = nullBed;
     Close();
+	*/
 
     *_A = (struct interval *) malloc(
             sizeof(struct interval) * (*A_size));
@@ -742,8 +757,9 @@ void BedFile::loadBedFileIntoStartEndArrays( unsigned int **_B_starts,
     int lineNum = 0;
     BedLineStatus bedStatus;
 
-    *B_size = 0;
+    *B_size = countLines();
 
+	/*
     Open();
 
     while ((bedStatus = this->GetNextBed(bedEntry, lineNum)) != BED_INVALID) {
@@ -754,6 +770,7 @@ void BedFile::loadBedFileIntoStartEndArrays( unsigned int **_B_starts,
     }
 	bedEntry = nullBed;
     Close();
+	*/
 
 	*_B_starts = (unsigned int*) malloc( 
 				sizeof(struct interval) * (*B_size));

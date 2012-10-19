@@ -53,13 +53,19 @@ BitsTest::~BitsTest(void) {
 
 void BitsTest::TestOverlaps() 
 {
-    vector<struct interval> A, B;
-    read_and_map_files(_genome,
-                       &_offsets,
-                       _bedA,
-                       _bedB,
-                       &A,
-                       &B);
+    struct interval *A, *B;
+	unsigned int A_size, B_size;
+    //vector<struct interval> A, B;
+	
+	read_and_map_files_to_interval_arrays_skip_vector(_genome,
+													  &_offsets,
+													  _bedA,
+													  _bedB,
+													  &A,
+													  &A_size,
+													  &B,
+													  &B_size);
+
 
 	CHRPOS max_offset = 0;
 	map<string,CHRPOS>::const_iterator itr;
@@ -69,10 +75,10 @@ void BitsTest::TestOverlaps()
 	unsigned int O;
 	double mean,sd,p;
 
-    test_intersections_bsearch_seq(&A[0],
-								   A.size(),
-								   &B[0],
-								   B.size(),
+    test_intersections_bsearch_seq(A,
+								   A_size,
+								   B,
+								   B_size,
 								   _N,
 								   max_offset,
 								   &O,

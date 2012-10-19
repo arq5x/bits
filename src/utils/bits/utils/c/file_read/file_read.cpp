@@ -135,7 +135,7 @@ void read_and_map_files_to_array(GenomeFile *_genome,
 }
 //}}}
 
-//{{{ void read_and_map_files_to_array(GenomeFile *_genome,
+//{{{ void read_and_map_files_to_array_skip_vector(GenomeFile *_genome,
 void read_and_map_files_to_array_skip_vector(GenomeFile *_genome,
 								 map<string,CHRPOS> *_offsets,
 								 BedFile *_bedA,
@@ -160,6 +160,30 @@ void read_and_map_files_to_array_skip_vector(GenomeFile *_genome,
 										  _B_ends,
 										  B_size ,
 										  _offsets );
+}
+//}}}
+
+//{{{ void read_and_map_files_to_array_skip_vector(GenomeFile *_genome,
+void read_and_map_files_to_interval_arrays_skip_vector(GenomeFile *_genome,
+								 map<string,CHRPOS> *_offsets,
+								 BedFile *_bedA,
+								 BedFile *_bedB,
+								 struct interval **_A,
+								 unsigned int *A_size,
+								 struct interval **_B,
+								 unsigned int *B_size)
+{
+    vector<string> chromList =  _genome->getChromList();
+    CHRPOS curr_offset = 0;
+    for (size_t c = 0; c < chromList.size(); ++c) {
+        string currChrom = chromList[c];
+        CHRPOS currChromSize = _genome->getChromSize(currChrom);
+		(*_offsets)[currChrom] = curr_offset;
+		curr_offset += currChromSize;
+	}
+
+	_bedA->loadBedFileIntoIntervalArray(_A, A_size, _offsets);
+	_bedB->loadBedFileIntoIntervalArray(_B, B_size , _offsets );
 }
 //}}}
 
