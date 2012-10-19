@@ -1,4 +1,5 @@
 include ../../defs.cuda
+include ../../defs.local
 UTILITIES_DIR = ../utils/
 OBJ_DIR = ../../obj/
 BIN_DIR = ../../bin/
@@ -61,11 +62,12 @@ all: $(PROGRAM)
 $(PROGRAM): $(BUILT_OBJECTS) $(BUILT_CUDA_OBJECTS) $(EXT_OBJECTS) 
 	@echo " * linking $(PROGRAM)"
 	g++ $(LFLAGS_A) $(LDFLAGS) $(CXXFLAGS) -o $(BIN_DIR)/$@ $^ $(LIBS) \
-		-lz $(LFLAGS_B) -lgsl -lgslcblas -lm
+		$(LOCAL_LIBS) -lz $(LFLAGS_B) -lgsl -lgslcblas -lm
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo " * compiling" $(*F).cpp
-	$(NVCC) -m64 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) -O3
+	$(NVCC) -m64 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) -O3 \
+		$(LOCAL_INCLUDES)
 
 $(BUILT_CUDA_OBJECTS): $(CUDA_SOURCES)
 	@echo "  * compiling" $(*F)

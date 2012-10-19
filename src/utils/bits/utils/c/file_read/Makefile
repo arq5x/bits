@@ -1,3 +1,4 @@
+include ../../../../../../defs.local
 OBJ_DIR = ../../../../../../obj
 UTILITIES_DIR = ../../../../../utils/
 INCLUDES = -I$(UTILITIES_DIR)/bedFile/ \
@@ -21,7 +22,8 @@ BUILT_OBJECTS= $(patsubst %,$(OBJ_DIR)/%,$(OBJECTS))
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo "  * compiling" $(*F).cpp
-	@$(CXX) -O3 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) -lm
+	@$(CXX) -O3 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) -lm \
+		$(LOCAL_INCLUDES)
 
 clean:
 	@echo "Cleaning up."

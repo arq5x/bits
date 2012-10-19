@@ -1,4 +1,5 @@
 include ../../../../../../defs.cuda
+include ../../../../../../defs.local
 
 OBJ_DIR = ../../../../../../obj/
 UTILITIES_DIR = ../../../../../utils/
@@ -39,11 +40,13 @@ all: $(BUILT_OBJECTS) $(BUILT_CUDA_OBJECTS)
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo "  * compiling" $(*F).c
-	@$(CXX) -c -o $@ $(*F).c $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	@$(CXX) -c -o $@ $(*F).c $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) \
+		$(LOCAL_INCLUDES)
 
 $(BUILT_CUDA_OBJECTS): $(CUDA_SOURCES)
 	@echo "  * compiling" $(*F)
-	$(NVCC) -m64 -c -o $@ $(*F) $(INCLUDES)
+	$(NVCC) -m64 -c -o $@ $(*F) $(INCLUDES) \
+		$(LOCAL_INCLUDES)
 
 $(EXT_OBJECTS):
 	@$(MAKE) --no-print-directory -C -W $(INCLUDES)

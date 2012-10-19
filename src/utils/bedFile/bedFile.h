@@ -16,6 +16,7 @@
 #include "gzstream.h"
 #include "lineFileUtilities.h"
 #include "fileType.h"
+#include "interval.h"
 
 // standard includes
 #include <vector>
@@ -422,6 +423,19 @@ public:
     
     // load a BED file into a vector
     void loadBedFileIntoVector();
+
+
+	void loadBedFileIntoIntervalArray( 	struct interval **_A,
+                                    	unsigned int *A_size ,
+                                    	map<string,CHRPOS> *_offsets );
+	void loadBedFileIntoStartEndArrays( unsigned int **_B_starts,
+								 		unsigned int **_B_ends,
+								 		unsigned int *B_size,
+                                    	map<string,CHRPOS> *_offsets );
+
+
+
+
 
     // Given a chrom, start, end and strand for a single feature,
     // search for all overlapping features in another BED file.

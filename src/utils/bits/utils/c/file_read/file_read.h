@@ -34,6 +34,16 @@ void read_and_map_files_to_array(GenomeFile *_genome,
 								 unsigned int **_B_ends,
 								 unsigned int *B_size);
 
+void read_and_map_files_to_array_skip_vector(GenomeFile *_genome,
+								 map<string,CHRPOS> *_offsets,
+								 BedFile *_bedA,
+								 BedFile *_bedB,
+								 struct interval **_A,
+								 unsigned int *A_size,
+								 unsigned int **_B_starts,
+								 unsigned int **_B_ends,
+								 unsigned int *B_size);
+
 #if 1
 void rand_human_chr(char *c, unsigned int *c_id);
 void rand_human_interval(unsigned int len,

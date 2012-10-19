@@ -8,7 +8,8 @@ INCLUDES = -I$(UTILITIES_DIR)/lineFileUtilities/ \
 		   -I$(UTILITIES_DIR)/gzstream/ \
 		   -I$(UTILITIES_DIR)/fileType/ \
 		   -I$(UTILITIES_DIR)/stringUtilities/ \
-			-I$(UTILITIES_DIR)/bits/utils/c/timer/
+		   -I$(UTILITIES_DIR)/bits/utils/c/timer/ \
+           -I$(UTILITIES_DIR)/bits/interval_intersection/lib/seq 
 
 # ----------------------------------
 # define our source and object files
@@ -21,7 +22,7 @@ BUILT_OBJECTS= $(patsubst %,$(OBJ_DIR)/%,$(OBJECTS))
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo "  * compiling" $(*F).cpp
-	@$(CXX) -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	@$(CXX) -g -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
 
 $(EXT_OBJECTS):
 	@$(MAKE) --no-print-directory -C -W $(INCLUDES)

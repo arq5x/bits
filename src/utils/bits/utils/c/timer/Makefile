@@ -1,3 +1,4 @@
+include ../../../../../../defs.local
 OBJ_DIR = ../../../../../../obj
 UTILITIES_DIR = ../../../../../utils/
 
@@ -12,7 +13,8 @@ BUILT_OBJECTS= $(patsubst %,$(OBJ_DIR)/%,$(OBJECTS))
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo "  * compiling" $(*F).c
-	@$(CXX) -c -o $@ $(*F).c $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	@$(CXX) -c -o $@ $(*F).c $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) \
+		$(LOCAL_INCLUDES)
 
 clean:
 	@echo "Cleaning up."

@@ -1,3 +1,4 @@
+include ../../defs.local
 UTILITIES_DIR = ../utils/
 OBJ_DIR = ../../obj/
 BIN_DIR = ../../bin/
@@ -15,6 +16,7 @@ INCLUDES = -I$(UTILITIES_DIR)/bedFile/ \
 		   -I$(UTILITIES_DIR)/bits/utils/c/mt/ \
 		   -I$(UTILITIES_DIR)/bits/utils/c/timer/ \
 		   -I$(UTILITIES_DIR)/bits/utils/c/file_read/
+
 # ----------------------------------
 # define our source and object files
 # ----------------------------------
@@ -45,11 +47,12 @@ all: $(PROGRAM)
 $(PROGRAM): $(BUILT_OBJECTS) $(EXT_OBJECTS)
 	@echo " * linking $(PROGRAM)"
 	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o $(BIN_DIR)/$@ $^ $(LIBS) \
-		-lz  -lgsl -lgslcblas -lm 
+		$(LOCAL_LIBS) -lz  -lgsl -lgslcblas -lm 
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo " * compiling" $(*F).cpp
-	@$(CXX) -O3 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	@$(CXX) -O3 -c -o $@ $(*F).cpp $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) \
+		$(LOCAL_INCLUDES)
 
 $(BUILT_CUDA_OBJECTS): $(CUDA_SOURCES)
 	@echo "  * compiling" $(*F)

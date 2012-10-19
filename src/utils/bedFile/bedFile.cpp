@@ -683,3 +683,103 @@ void BedFile::loadBedFileIntoVector() {
 		//close_time << "\t" <<
 		//(double)close_time/total_time << endl;
 }
+
+void BedFile::loadBedFileIntoIntervalArray( struct interval **_A,
+                                    unsigned int *A_size ,
+                                    map<string,CHRPOS> *_offsets ) {
+
+    BED bedEntry, nullBed;
+    int lineNum = 0;
+    BedLineStatus bedStatus;
+
+    *A_size = 0;
+
+    Open();
+
+    while ((bedStatus = this->GetNextBed(bedEntry, lineNum)) != BED_INVALID) {
+        if (bedStatus == BED_VALID) {
+            *A_size = *A_size + 1;
+            //bedList.push_back(bedEntry);
+            bedEntry = nullBed;
+        }
+    }
+	bedEntry = nullBed;
+    Close();
+
+    *_A = (struct interval *) malloc(
+            sizeof(struct interval) * (*A_size));
+
+    Open();
+
+    string last_chr;
+    CHRPOS last_proj = 0;
+	int i = 0;
+
+    while ((bedStatus = this->GetNextBed(bedEntry, lineNum)) != BED_INVALID) {
+        if (bedStatus == BED_VALID) {
+            if (bedEntry.chrom.compare(last_chr) != 0)
+                last_proj = (*_offsets)[bedEntry.chrom];
+
+            (*_A)[i].start = last_proj + bedEntry.start + 1;
+            (*_A)[i].end = last_proj +  bedEntry.end;
+
+			++i;
+
+            last_chr = bedEntry.chrom;
+
+            bedEntry = nullBed;
+        }
+    }
+    Close();
+}
+
+void BedFile::loadBedFileIntoStartEndArrays( unsigned int **_B_starts,
+								 			unsigned int **_B_ends,
+								 			unsigned int *B_size,
+                                    		map<string,CHRPOS> *_offsets ) {
+
+    BED bedEntry, nullBed;
+    int lineNum = 0;
+    BedLineStatus bedStatus;
+
+    *B_size = 0;
+
+    Open();
+
+    while ((bedStatus = this->GetNextBed(bedEntry, lineNum)) != BED_INVALID) {
+        if (bedStatus == BED_VALID) {
+        	*B_size = *B_size + 1;
+            bedEntry = nullBed;
+        }
+    }
+	bedEntry = nullBed;
+    Close();
+
+	*_B_starts = (unsigned int*) malloc( 
+				sizeof(struct interval) * (*B_size));
+	*_B_ends = (unsigned int*) malloc( 
+				sizeof(struct interval) * (*B_size));
+
+    Open();
+
+    string last_chr;
+    CHRPOS last_proj = 0;
+	int i = 0;
+
+    while ((bedStatus = this->GetNextBed(bedEntry, lineNum)) != BED_INVALID) {
+        if (bedStatus == BED_VALID) {
+            if (bedEntry.chrom.compare(last_chr) != 0)
+                last_proj = (*_offsets)[bedEntry.chrom];
+
+			(*_B_starts)[i] = last_proj + bedEntry.start + 1;
+			(*_B_ends)[i] = last_proj +  bedEntry.end;
+
+			++i;
+
+            last_chr = bedEntry.chrom;
+
+            bedEntry = nullBed;
+        }
+    }
+    Close();
+}

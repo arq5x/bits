@@ -47,6 +47,8 @@ void BitsCount::CountOverlaps() {
 	unsigned int *B_starts, *B_ends;
 	unsigned int A_size, B_size;
 
+
+/*
 	read_and_map_files_to_array(_genome,
 			           &_offsets,
 					   _bedA,
@@ -56,6 +58,18 @@ void BitsCount::CountOverlaps() {
 					   &B_starts,
 					   &B_ends,
 					   &B_size);
+*/
+
+	read_and_map_files_to_array_skip_vector(_genome,
+			           &_offsets,
+					   _bedA,
+					   _bedB,
+					   &A,
+					   &A_size,
+					   &B_starts,
+					   &B_ends,
+					   &B_size);
+
 
 
     uint32_t tot_overlaps = 

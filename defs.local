@@ -1,0 +1,3 @@
+LOCAL_INCLUDES=-I/sw/include/
+
+LOCAL_LIBS=-L/sw/lib/

@@ -1,3 +1,4 @@
+include ../../../../../../defs.local
 OBJ_DIR = ../../../../../../obj/
 UTILITIES_DIR = ../../../../../utils/
 
@@ -40,10 +41,12 @@ all: $(BUILT_OBJECTS)
 
 $(BUILT_OBJECTS): $(SOURCES)
 	@echo "  * compiling" $(*F).c
-	@$(CXX) -O3 -c -o $@ $(*F).c $(LDFLAGS) $(CXXFLAGS) $(INCLUDES)
+	@$(CXX) -O3 -c -o $@ $(*F).c $(LDFLAGS) $(CXXFLAGS) $(INCLUDES) \
+		$(LOCAL_INCLUDES)
 
 $(EXT_OBJECTS):
-	@$(MAKE) --no-print-directory -C -W $(INCLUDES)
+	@$(MAKE) --no-print-directory -C -W $(INCLUDES) \
+		$(LOCAL_INCLUDES)
 
 clean:
 	@echo "Cleaning up."
