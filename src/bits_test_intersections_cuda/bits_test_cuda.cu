@@ -51,6 +51,7 @@ BitsTestCUDA::~BitsTestCUDA(void) {
 
 void BitsTestCUDA::TestOverlapsCUDA() {
 
+	/*
 	int *prt;
 	cudaMalloc(&prt, 0);
 
@@ -71,6 +72,9 @@ void BitsTestCUDA::TestOverlapsCUDA() {
 	unsigned int O;
 	double mean,sd,p;
 
+
+
+
     test_intersections_bsearch_cuda(&A[0],
 								    A.size(),
 								    &B[0],
@@ -81,6 +85,40 @@ void BitsTestCUDA::TestOverlapsCUDA() {
 								    &mean,
 								    &sd,
 								    &p);
+	*/
 
+    struct interval *A, *B;
+	unsigned int A_size, B_size;
+    //vector<struct interval> A, B;
+	
+	read_and_map_files_to_interval_arrays_skip_vector(_genome,
+													  &_offsets,
+													  _bedA,
+													  _bedB,
+													  &A,
+													  &A_size,
+													  &B,
+													  &B_size);
+
+
+	CHRPOS max_offset = 0;
+	map<string,CHRPOS>::const_iterator itr;
+	for (itr = _offsets.begin(); itr != _offsets.end(); ++itr)
+		max_offset += itr->second;
+
+	unsigned int O;
+	double mean,sd,p;
+
+    test_intersections_bsearch_cuda( A,
+								   A_size,
+								   B,
+								   B_size,
+								   _N,
+								   max_offset,
+								   &O,
+								   &mean,
+								   &sd,
+								   &p);
+	
 	printf("O:%u\tE:%f\tsd:%f\tp:%f\n", O, mean, sd, p);
 }

@@ -136,3 +136,11 @@ example::
         done
     done
 
+
+Trouble Shooting
+================
+OS X:  If you get the "no CUDA-capable device is detected" after installing the
+drivers, try turning off "Automatic graphics switching." Go to launchpad/System
+Preferences/Energy Saver and uncheck Automatic graphics switching.  Thanks to
+Stéphane Plaisance for this fix.
+
