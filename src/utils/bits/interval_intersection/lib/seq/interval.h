@@ -105,4 +105,25 @@ unsigned int count_intersections_bsearch_seq_mem(struct interval *A,
 												 unsigned int *B_starts,
 												 unsigned int *B_ends,
 												 unsigned int size_B);
+
+void two_side_simple_permute(unsigned int mask,
+							 unsigned int max_offset,
+							 struct interval *A,
+							 unsigned int *A_starts,
+							 unsigned int size_A,
+							 unsigned int *B_starts,
+							 unsigned int *B_ends,
+							 unsigned int *B_lens,
+							 unsigned int size_B);
+
+void one_side_simple_permute(unsigned int mask,
+							 unsigned int max_offset,
+							 struct interval *A,
+							 unsigned int *A_starts,
+							 unsigned int size_A,
+							 unsigned int *B_starts,
+							 unsigned int *B_ends,
+							 unsigned int *B_lens,
+							 unsigned int size_B);
+
 #endif

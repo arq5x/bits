@@ -590,27 +590,29 @@ void test_intersections_bsearch_seq(struct interval *A,
 	unsigned int *sims = (unsigned int *) malloc(n * sizeof(unsigned int));
 	for (j = 0; j < n; j++) {
 
-		for (i = 0; i < size_A; i++) 
-			A_starts[i] = get_rand(max_offset, mask);
+            /*
+		two_side_simple_permute(mask,
+							 max_offset,
+							 A,
+							 A_starts,
+							 size_A,
+							 B_starts,
+							 B_ends,
+							 B_lens,
+							 size_B);
+            */
 
-		qsort(A_starts, size_A, sizeof(unsigned int), compare_unsigned_int); 
+		one_side_simple_permute(mask,
+							 max_offset,
+							 A,
+							 A_starts,
+							 size_A,
+							 B_starts,
+							 B_ends,
+							 B_lens,
+							 size_B);
 
-		int len;
-		for (i = 0; i < size_A; i++) {
-			len = A[i].end - A[i].start;
-			A[i].start = A_starts[i];
-			A[i].end = A[i].start + len;
-		}
 
-		for (i = 0; i < size_B; i++) 
-			B_starts[i] = get_rand(max_offset, mask);
-
-		qsort(B_starts, size_B, sizeof(unsigned int), compare_unsigned_int); 
-
-		for (i = 0; i < size_B; i++) 
-			B_ends[i] = B_starts[i] + B_lens[i];
-		
-		qsort(B_ends, size_B, sizeof(unsigned int), compare_unsigned_int); 
 
 		unsigned int T  = count_seq(A,
 									size_A,
@@ -698,3 +700,92 @@ unsigned int count_intersections_bsearch_seq_mem(struct interval *A,
 	return O;
 }
 //}}}
+
+
+//{{{ void two_side_simple_permute(unsigned int mask,
+void two_side_simple_permute(unsigned int mask,
+							 unsigned int max_offset,
+							 struct interval *A,
+							 unsigned int *A_starts,
+							 unsigned int size_A,
+							 unsigned int *B_starts,
+							 unsigned int *B_ends,
+							 unsigned int *B_lens,
+							 unsigned int size_B)
+{
+	int i;
+	for (i = 0; i < size_A; i++) 
+		A_starts[i] = get_rand(max_offset, mask);
+
+	qsort(A_starts, size_A, sizeof(unsigned int), compare_unsigned_int); 
+
+	int len;
+	for (i = 0; i < size_A; i++) {
+		len = A[i].end - A[i].start;
+		A[i].start = A_starts[i];
+		A[i].end = A[i].start + len;
+	}
+
+
+	for (i = 0; i < size_B; i++) 
+		B_starts[i] = get_rand(max_offset, mask);
+
+	qsort(B_starts, size_B, sizeof(unsigned int), compare_unsigned_int); 
+
+	for (i = 0; i < size_B; i++) 
+		B_ends[i] = B_starts[i] + B_lens[i];
+	
+	qsort(B_ends, size_B, sizeof(unsigned int), compare_unsigned_int); 
+}
+//}}}
+
+//{{{ void one_side_simple_permute(unsigned int mask,
+void one_side_simple_permute(unsigned int mask,
+							 unsigned int max_offset,
+							 struct interval *A,
+							 unsigned int *A_starts,
+							 unsigned int size_A,
+							 unsigned int *B_starts,
+							 unsigned int *B_ends,
+							 unsigned int *B_lens,
+							 unsigned int size_B)
+{
+	int i;
+
+	for (i = 0; i < size_B; i++) 
+		B_starts[i] = get_rand(max_offset, mask);
+
+	qsort(B_starts, size_B, sizeof(unsigned int), compare_unsigned_int); 
+
+	for (i = 0; i < size_B; i++) 
+		B_ends[i] = B_starts[i] + B_lens[i];
+	
+	qsort(B_ends, size_B, sizeof(unsigned int), compare_unsigned_int); 
+}
+//}}}
+
+//{{{ void one_side_gap_permute(unsigned int mask,
+void one_side_gap_permute(unsigned int mask,
+							 unsigned int max_offset,
+							 struct interval *A,
+							 unsigned int *A_starts,
+							 unsigned int size_A,
+							 unsigned int *B_starts,
+							 unsigned int *B_ends,
+							 unsigned int *B_lens,
+							 unsigned int size_B)
+{
+	int i;
+
+	for (i = 0; i < size_B; i++) 
+		B_starts[i] = get_rand(max_offset, mask);
+
+	qsort(B_starts, size_B, sizeof(unsigned int), compare_unsigned_int); 
+
+	for (i = 0; i < size_B; i++) 
+		B_ends[i] = B_starts[i] + B_lens[i];
+	
+	qsort(B_ends, size_B, sizeof(unsigned int), compare_unsigned_int); 
+}
+//}}}
+
