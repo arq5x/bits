@@ -69,8 +69,10 @@ void BitsTest::TestOverlaps()
 
 	CHRPOS max_offset = 0;
 	map<string,CHRPOS>::const_iterator itr;
-	for (itr = _offsets.begin(); itr != _offsets.end(); ++itr)
-		max_offset += itr->second;
+	for (itr = _offsets.begin(); itr != _offsets.end(); ++itr) {
+                if (max_offset < itr->second)
+		    max_offset = itr->second;
+        }
 
 	unsigned int O;
 	double mean,sd,p;
